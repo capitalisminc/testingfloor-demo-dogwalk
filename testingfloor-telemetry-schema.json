@@ -1,0 +1,433 @@
+{
+  "map_id_path": "game_level.id",
+  "app_version_path": "tf_context.app_version",
+  "elapsed_game_time_path": "run.elapsed_seconds",
+  "spatial_sources": {
+    "player_position": {
+      "x": "player.position.x",
+      "y": "player.position.y",
+      "z": "player.position.z"
+    },
+    "prop_position": {
+      "x": "prop.position.x",
+      "y": "prop.position.y",
+      "z": "prop.position.z"
+    }
+  },
+  "common_field_prefixes": [
+    "camera.",
+    "movement.",
+    "player.position.",
+    "teleport.",
+    "game_level.",
+    "run."
+  ],
+  "topline_keys": [
+    {
+      "key": "items.found",
+      "label": "Items found"
+    },
+    {
+      "key": "items.placed",
+      "label": "Snowman decorations"
+    },
+    {
+      "key": "child.mood",
+      "label": "Child mood (0\u201310)"
+    },
+    {
+      "key": "child.stamina",
+      "label": "Stamina (0\u201310)"
+    },
+    {
+      "key": "leash.length",
+      "label": "Leash (m)"
+    },
+    {
+      "key": "dog.speed",
+      "label": "Speed (m/s)"
+    }
+  ],
+  "event_rules": [
+    {
+      "event_types": [
+        "level_loaded"
+      ],
+      "name": "Entered Winter Forest",
+      "template": "generic",
+      "style": {
+        "icon": "map-location-dot",
+        "background": "blue",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "new_game_started"
+      ],
+      "name": "New adventure",
+      "template": "generic",
+      "style": {
+        "icon": "play",
+        "background": "blue",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "saved_game_continued"
+      ],
+      "name": "Continued saved game",
+      "template": "generic",
+      "style": {
+        "icon": "play",
+        "background": "blue",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "level_completed"
+      ],
+      "name": "Snowman completed",
+      "template": "generic",
+      "style": {
+        "icon": "flag-checkered",
+        "background": "green",
+        "noise": false
+      },
+      "metadata": [
+        {
+          "label": "Decorations",
+          "path": "items.placed"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "story_phase_changed"
+      ],
+      "name": "Story phase changed",
+      "template": "generic",
+      "style": {
+        "icon": "book",
+        "background": "muted",
+        "noise": true
+      },
+      "metadata": [
+        {
+          "label": "Phase",
+          "path": "story.phase"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "item_picked_up"
+      ],
+      "name": "Found a decoration",
+      "template": "generic",
+      "style": {
+        "icon": "hand",
+        "background": "amber",
+        "noise": false
+      },
+      "metadata": [
+        {
+          "label": "Item",
+          "path": "item.id"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "item_placed"
+      ],
+      "name": "Decorated the snowman",
+      "template": "generic",
+      "style": {
+        "icon": "snowman",
+        "background": "green",
+        "noise": false
+      },
+      "metadata": [
+        {
+          "label": "Item",
+          "path": "item.id"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "gate_opened"
+      ],
+      "name": "Opened the gate",
+      "template": "generic",
+      "style": {
+        "icon": "door-open",
+        "background": "green",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "dog_barked"
+      ],
+      "name": "Chocomel barked",
+      "template": "generic",
+      "style": {
+        "icon": "volume-high",
+        "background": "blue",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "digging_started"
+      ],
+      "name": "Started digging",
+      "template": "generic",
+      "style": {
+        "icon": "paw",
+        "background": "amber",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "digging_stopped"
+      ],
+      "name": "Stopped digging",
+      "template": "generic",
+      "style": {
+        "icon": "paw",
+        "background": "muted",
+        "noise": true
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "child_stuck"
+      ],
+      "name": "Pinda got stuck",
+      "template": "generic",
+      "style": {
+        "icon": "person-falling",
+        "background": "red",
+        "noise": false
+      },
+      "metadata": [
+        {
+          "label": "Stamina",
+          "path": "child.stamina"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "child_getting_up"
+      ],
+      "name": "Pinda getting up",
+      "template": "generic",
+      "style": {
+        "icon": "person-walking",
+        "background": "green",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "child_upset"
+      ],
+      "name": "Pinda upset",
+      "template": "generic",
+      "style": {
+        "icon": "face-sad-tear",
+        "background": "red",
+        "noise": false
+      },
+      "metadata": [
+        {
+          "label": "Mood",
+          "path": "child.mood"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "child_help_requested"
+      ],
+      "name": "Pinda called for help",
+      "template": "generic",
+      "style": {
+        "icon": "hand",
+        "background": "amber",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "interaction_started"
+      ],
+      "name": "Dog and child interaction",
+      "template": "generic",
+      "style": {
+        "icon": "heart",
+        "background": "blue",
+        "noise": false
+      },
+      "metadata": [
+        {
+          "label": "Interaction",
+          "path": "interaction.type"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "interaction_ended"
+      ],
+      "name": "Interaction finished",
+      "template": "generic",
+      "style": {
+        "icon": "heart",
+        "background": "muted",
+        "noise": true
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "point_of_interest_reached"
+      ],
+      "name": "Reached a landmark",
+      "template": "generic",
+      "style": {
+        "icon": "location-dot",
+        "background": "blue",
+        "noise": false
+      },
+      "metadata": [
+        {
+          "label": "Landmark",
+          "path": "object.id"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "prop_toppled"
+      ],
+      "name": "Knocked over a prop",
+      "template": "generic",
+      "style": {
+        "icon": "tree",
+        "background": "amber",
+        "noise": false
+      },
+      "metadata": [
+        {
+          "label": "Prop",
+          "path": "prop.name"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "game_paused"
+      ],
+      "name": "Paused",
+      "template": "generic",
+      "style": {
+        "icon": "pause",
+        "background": "muted",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "game_resumed"
+      ],
+      "name": "Resumed",
+      "template": "generic",
+      "style": {
+        "icon": "play",
+        "background": "muted",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "returned_to_menu"
+      ],
+      "name": "Returned to menu",
+      "template": "generic",
+      "style": {
+        "icon": "house",
+        "background": "muted",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "game_exited"
+      ],
+      "name": "Exited game",
+      "template": "generic",
+      "style": {
+        "icon": "door-open",
+        "background": "muted",
+        "noise": false
+      },
+      "metadata": []
+    },
+    {
+      "event_types": [
+        "player_moved"
+      ],
+      "name": "Chocomel movement",
+      "template": "generic",
+      "style": {
+        "icon": "location-arrow",
+        "background": "muted",
+        "noise": true
+      },
+      "metadata": [
+        {
+          "label": "Speed (m/s)",
+          "path": "dog.speed"
+        }
+      ]
+    },
+    {
+      "event_types": [
+        "player_teleported"
+      ],
+      "name": "Loaded saved position",
+      "template": "generic",
+      "style": {
+        "icon": "arrows-rotate",
+        "background": "muted",
+        "noise": true
+      },
+      "metadata": [
+        {
+          "label": "Reason",
+          "path": "teleport.reason"
+        }
+      ]
+    }
+  ]
+}

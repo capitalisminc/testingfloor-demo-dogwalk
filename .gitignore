@@ -1,2 +1,11 @@
 .godot/
 .DS_Store
+
+.env
+.env.*
+!.env.example
+Artifacts/
+Builds/
+addons/testing_floor/TestingFloor.local.json
+__pycache__/
+*.py[cod]

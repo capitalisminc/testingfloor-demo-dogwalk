@@ -151,7 +151,7 @@ func _on_new_game_button_pressed():
 	fade_to_new_game()
 	
 func _on_quit_button_pressed():
-	get_tree().quit()
+	TestingFloor.quit_game()
 	
 func _on_settings_button_pressed():
 	toggle_settings()

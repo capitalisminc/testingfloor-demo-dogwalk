@@ -117,6 +117,7 @@ func load_game(key = "0"):
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
+	DogwalkTelemetry.begin_save_load()
 	var save_file = FileAccess.open("user://savegame_"+key+".save", FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
@@ -148,6 +149,7 @@ func load_game(key = "0"):
 				node.set(i, node_data[i])
 	
 	GameStatus.init_load()
+	DogwalkTelemetry.end_save_load()
 
 func save_exists(key = "0"):
 	return FileAccess.file_exists("user://savegame_"+key+".save")

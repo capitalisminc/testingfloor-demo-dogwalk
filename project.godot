@@ -14,11 +14,13 @@ warnings/check_invalid_track_paths=false
 
 [application]
 
-config/name="DOGWALK"
+config/name="DOGWALK — Testing Floor"
 config/description="Play as a big adorable dog and explore a hand-crafted winter forest with a little kid in tow.
 A short, free, open source project brought to you by Blender Studio."
-config/version="v1.0.1"
+config/version="dogwalk-tf-0.1.0"
 run/main_scene="uid://d3i1jbwaf8wjo"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Testing Floor/DOGWALK"
 config/project_settings_override="user://project_overrides.cfg"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
@@ -44,6 +46,8 @@ SaveManager="*res://source/globals/save_manager.gd"
 ToppleManager="*res://source/globals/topple_manager.gd"
 WiggleManager="*res://source/globals/wiggle_manager.gd"
 Launch="*res://source/globals/launch.gd"
+TestingFloor="*res://addons/testing_floor/autoload.gd"
+DogwalkTelemetry="*res://source/testing_floor/dogwalk_telemetry.gd"
 
 [debug]
 

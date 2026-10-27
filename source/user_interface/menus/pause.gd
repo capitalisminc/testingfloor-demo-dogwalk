@@ -107,7 +107,7 @@ func _on_quit_button_pressed():
 		save_sound.play()
 		await get_tree().create_timer(save_sound.stream.get_length() + .01).timeout
 		
-	get_tree().quit()
+	TestingFloor.quit_game()
 	
 func _on_settings_button_pressed():
 	if state == menu_states.SETTINGS:
