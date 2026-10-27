@@ -19,6 +19,9 @@ func _capture() -> void:
 	for node in context.interactable_nodes.values():
 		if is_instance_valid(node) and node is Node3D:
 			points.append(node.global_position)
+	for node in get_tree().get_nodes_in_group("LeashPivots"):
+		if is_instance_valid(node) and node is Node3D:
+			points.append(node.global_position)
 	if points.is_empty():
 		push_error("No landmarks found for map bounds.")
 		get_tree().quit(1)
@@ -29,7 +32,7 @@ func _capture() -> void:
 		low = low.min(point)
 		high = high.max(point)
 	var center := (low + high) / 2.0
-	var span := maxf(high.x - low.x, high.z - low.z) + 40.0
+	var span := maxf(high.x - low.x, high.z - low.z) + 16.0
 	var viewport := SubViewport.new()
 	viewport.size = Vector2i(2048, 2048)
 	viewport.world_3d = root.world_3d
