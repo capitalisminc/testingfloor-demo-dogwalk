@@ -55,6 +55,8 @@ func _run() -> void:
 	shovel.item_state = GameStatus.item_states.HELD
 	DogwalkTelemetry.end_save_load()
 	var distance := start.distance_to(Context.chocomel.global_position)
+	# TestingFloor.quit() would end this check before it reports, so do its first two steps.
+	TestingFloor.quitting.emit()
 	TestingFloor.shutdown()
 	await TestingFloor.drain(5.0)
 	var names := {}
@@ -62,7 +64,7 @@ func _run() -> void:
 		names[event["$name"]] = int(names.get(event["$name"], 0)) + 1
 	var success := GameStatus.current_game_state == GameStatus.game_states.GAMEPLAY and distance > 0.5
 	if not _live:
-		for expected in ["new_game_started", "story_phase_changed", "player_moved", "$tf_objects", "game_paused", "game_resumed"]:
+		for expected in ["new_game_started", "story_phase_changed", "player_moved", "$tf_objects", "game_paused", "game_resumed", "game_exited"]:
 			success = success and names.has(expected)
 	if not _live:
 		success = success and names.get("item_picked_up", 0) == 1 and names.get("player_teleported", 0) == 1

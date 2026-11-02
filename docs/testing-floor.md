@@ -21,7 +21,7 @@ TestingFloor.set_object_state(id, "mood", 8.0)
 TestingFloor.remove_object(id, "level_unloaded")
 ```
 
-Use stable object IDs in events and object tracking so an interaction can be followed along the same object’s path. Use `record_teleport(start, finish, reason)` for save loads and respawns; this resets movement accumulation rather than counting the jump as traveled distance. The menus quit through `TestingFloor.quit()`, which completes the recording and waits briefly for the last events.
+Use stable object IDs in events and object tracking so an interaction can be followed along the same object’s path. Use `record_teleport(start, finish, reason)` for save loads and respawns; this resets movement accumulation rather than counting the jump as traveled distance. The menus quit through `TestingFloor.quit()`, which completes the recording and waits briefly for the last events. `game_exited` is tracked from TestingFloor's `quitting` signal, so menu quits and window closes both send it.
 
 Positions are Godot’s native **meters**, with **Y up**. Tracked objects are checked **4 times a second** and sent after moving **0.25 m**. With movement tracking on, `player_moved` pings at most every half second, after 0.5 m of movement or a camera turn. Gameplay events include the current player and camera positions. Persistent state is checked once per second and before gameplay events; full state and object keyframes repeat every five minutes.
 

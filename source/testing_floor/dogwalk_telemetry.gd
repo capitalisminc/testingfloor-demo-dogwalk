@@ -20,6 +20,8 @@ func _ready() -> void:
 	TestingFloor.context_provider = _context
 	TestingFloor.activity_source = _activity
 	TestingFloor.state_provider = _state
+	# Menus and window closes quit through TestingFloor, which signals before the session completes.
+	TestingFloor.quitting.connect(func() -> void: TestingFloor.track("game_exited"))
 	GameStatus.game_state_changed.connect(_phase_changed)
 	var arguments := OS.get_cmdline_user_args()
 	if "--tf-capture-map" in arguments:

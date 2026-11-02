@@ -11,6 +11,11 @@ const SIDECAR := "res://.godot/TestingFloor/recording-payload.json"
 const QR_INTERVAL := 15.0
 const AUTOMATION_ARGUMENTS := ["--tf-test", "--testing-floor-automation"]
 
+## Emitted when the game starts to quit, through [method quit] or a window close,
+## before the session completes. Track the game's last events from it, such as
+## how the run ended; events tracked after the session completes are refused.
+signal quitting
+
 ## Show the QR marker that lets Testing Floor match a recording to this run
 ## without a desktop handoff. Off by default; --forceqr turns it on.
 var qr_heartbeats := false
@@ -59,11 +64,14 @@ func _notification(what: int) -> void:
 	else:
 		# Godot quits right after this, so the last send may not finish. Use quit()
 		# or quit_after_delivery to wait for delivery.
+		quitting.emit()
 		shutdown()
 
 
-## Completes the session, waits up to [param timeout_seconds] for delivery, then quits.
+## Emits [signal quitting], completes the session, waits up to
+## [param timeout_seconds] for delivery, then quits.
 func quit(exit_code := 0, timeout_seconds := 2.0) -> void:
+	quitting.emit()
 	shutdown()
 	await drain(timeout_seconds)
 	get_tree().quit(exit_code)
