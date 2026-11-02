@@ -734,9 +734,15 @@ func _check_objects() -> void:
 		return
 	var keyframe := _objects_keyframe_due
 	var rows: Array[Dictionary] = []
+	var removed_ids := {}
 	for removal in _removals:
 		rows.append(removal)
+		removed_ids[removal.id] = true
 	for id in _objects.keys():
+		# An object tracked again under a removed object's ID starts in the next
+		# check, so its first sample comes after the removal.
+		if removed_ids.has(id):
+			continue
 		var object: Dictionary = _objects[id]
 		if object.reference != null and object.reference.get_ref() == null:
 			_objects.erase(id)
@@ -779,13 +785,13 @@ func _check_objects() -> void:
 			start += 1
 		if _enqueue(OBJECTS_RECORD, _object_record(group), keyframe, false, _exposed, time):
 			for row in group:
-				if _objects.has(row.id):
+				if not str(row.reason).is_empty():
+					_removals.erase(row)
+				elif _objects.has(row.id):
 					var object: Dictionary = _objects[row.id]
 					if row.position != null:
 						object.sent = row.position
 					object.sent_state.merge(row.state, true)
-				else:
-					_removals.erase(row)
 		else:
 			all_queued = false
 	if all_queued and keyframe:
