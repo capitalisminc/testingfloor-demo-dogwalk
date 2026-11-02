@@ -744,14 +744,17 @@ func _check_objects() -> void:
 		if removed_ids.has(id):
 			continue
 		var object: Dictionary = _objects[id]
+		# A removal waits in _removals until its record is queued, like one from remove_object().
 		if object.reference != null and object.reference.get_ref() == null:
 			_objects.erase(id)
-			rows.append({"id": id, "kind": object.kind, "position": object.known, "state": {}, "reason": "destroyed"})
+			_removals.append({"id": id, "kind": object.kind, "position": object.known, "state": {}, "reason": "destroyed"})
+			rows.append(_removals.back())
 			continue
 		var point: Variant = _as_vector3(object.source.call())
 		if point == null:
 			_objects.erase(id)
-			rows.append({"id": id, "kind": object.kind, "position": object.known, "state": {}, "reason": "gone"})
+			_removals.append({"id": id, "kind": object.kind, "position": object.known, "state": {}, "reason": "gone"})
+			rows.append(_removals.back())
 			continue
 		object.known = point
 		var row := {"id": id, "kind": object.kind, "position": null, "state": {}, "reason": ""}
