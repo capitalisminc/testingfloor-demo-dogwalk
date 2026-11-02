@@ -20,6 +20,9 @@ func _ready() -> void:
 	TestingFloor.context_provider = _context
 	TestingFloor.activity_source = _activity
 	TestingFloor.state_provider = _state
+	# Paths on the map come from movement samples; send them up to ten times a
+	# second instead of the SDK's two, like the other Testing Floor examples.
+	TestingFloor.movement_min_ping_interval = 0.1
 	# Menus and window closes quit through TestingFloor, which signals before the session completes.
 	TestingFloor.quitting.connect(func() -> void: TestingFloor.track("game_exited"))
 	GameStatus.game_state_changed.connect(_phase_changed)
