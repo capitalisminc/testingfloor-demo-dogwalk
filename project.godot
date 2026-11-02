@@ -46,7 +46,8 @@ SaveManager="*res://source/globals/save_manager.gd"
 ToppleManager="*res://source/globals/topple_manager.gd"
 WiggleManager="*res://source/globals/wiggle_manager.gd"
 Launch="*res://source/globals/launch.gd"
-TestingFloor="*res://addons/testing_floor/autoload.gd"
+TestingFloorLocalSettings="*res://source/testing_floor/local_settings.gd"
+TestingFloor="*res://addons/testing_floor/testing_floor.gd"
 DogwalkTelemetry="*res://source/testing_floor/dogwalk_telemetry.gd"
 
 [debug]
@@ -66,7 +67,7 @@ mouse_cursor/custom_image_hotspot=Vector2(12.5, 5)
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/blender_studio_gltf_import/plugin.cfg", "res://addons/lines_and_trails_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/blender_studio_gltf_import/plugin.cfg", "res://addons/lines_and_trails_3d/plugin.cfg", "res://addons/testing_floor/plugin.cfg")
 
 [global_group]
 
@@ -321,3 +322,8 @@ pinda_position={
 "type": "vec3",
 "value": Vector3(0, 0, 0)
 }
+
+[testing_floor]
+
+movement_tracking=true
+qr_heartbeats=true

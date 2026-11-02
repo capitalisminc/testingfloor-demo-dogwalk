@@ -10,15 +10,14 @@ func _ready() -> void:
 
 func _transport(payload: String, complete: Callable) -> void:
 	_records.append_array(JSON.parse_string(payload).events)
-	complete.call(200, true)
+	complete.call(200)
 
 func _run() -> void:
 	get_tree().create_timer(35.0).timeout.connect(func(): get_tree().quit(2))
 	if _live:
 		TestingFloor.set_state("integration.test", true)
 	else:
-		TestingFloor.transport = _transport
-		TestingFloor.enabled = true
+		TestingFloor.use_test_transport(_transport)
 	for frame in range(30):
 		await get_tree().process_frame
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -56,8 +55,8 @@ func _run() -> void:
 	shovel.item_state = GameStatus.item_states.HELD
 	DogwalkTelemetry.end_save_load()
 	var distance := start.distance_to(Context.chocomel.global_position)
-	TestingFloor.poll_objects()
-	await TestingFloor.shutdown(5.0)
+	TestingFloor.shutdown()
+	await TestingFloor.drain(5.0)
 	var names := {}
 	for event in _records:
 		names[event["$name"]] = int(names.get(event["$name"], 0)) + 1
@@ -68,7 +67,7 @@ func _run() -> void:
 	if not _live:
 		success = success and names.get("item_picked_up", 0) == 1 and names.get("player_teleported", 0) == 1
 	var result := {"ok": success, "live": _live, "distance_meters": distance,
-		"session_id": TestingFloor.session_id, "event_counts": names, "pending_events": TestingFloor.pending_count()}
+		"session_id": TestingFloor.play_session_id, "event_counts": names, "pending_events": TestingFloor.pending_count()}
 	DirAccess.make_dir_recursive_absolute("res://Artifacts")
 	var file := FileAccess.open("res://Artifacts/smoke-game.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(result, "  ") + "\n")

@@ -2,7 +2,7 @@
 
 This fork of Blender Studio’s [DOGWALK](https://studio.blender.org/projects/dogwalk/) demonstrates [Testing Floor](https://testingfloor.com) in a complete Godot game: recording sync, a gameplay timeline, character and collectible paths, and a rendered level map.
 
-Explore a winter forest as Chocomel, a big dog helping a child collect decorations for a snowman. The original art, lighting, animation, and gameplay are preserved. Our changes add a reusable Godot telemetry addon and game-specific instrumentation.
+Explore a winter forest as Chocomel, a big dog helping a child collect decorations for a snowman. The original art, lighting, animation, and gameplay are preserved. Our changes add the [Testing Floor SDK for Godot](https://github.com/capitalisminc/testingfloor-sdk-godot) and game-specific instrumentation.
 
 ## Play and explore
 
