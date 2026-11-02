@@ -17,7 +17,7 @@ warnings/check_invalid_track_paths=false
 config/name="DOGWALK — Testing Floor"
 config/description="Play as a big adorable dog and explore a hand-crafted winter forest with a little kid in tow.
 A short, free, open source project brought to you by Blender Studio."
-config/version="dogwalk-tf-0.1.0"
+config/version="dogwalk-tf-0.2.0"
 run/main_scene="uid://d3i1jbwaf8wjo"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="Testing Floor/DOGWALK"

@@ -57,7 +57,7 @@ func _capture() -> void:
 	var output := ProjectSettings.globalize_path("res://Artifacts/maps")
 	DirAccess.make_dir_recursive_absolute(output)
 	image.save_png(output.path_join("dogwalk_world.png"))
-	var manifest := {"organizationId": "example-studio", "gameId": "37", "appVersion": "dogwalk-tf-0.1.0", "maps": [{
+	var manifest := {"organizationId": "example-studio", "gameId": "37", "appVersion": "dogwalk-tf-0.2.0", "maps": [{
 		"levelId": "dogwalk_world", "image": "dogwalk_world.png", "variantKey": "overhead", "defaultVariant": true,
 		"horizontalAxis": "x", "verticalAxis": "z", "worldUnitsPerMeter": 1,
 		"bounds": {"centerX": center.x, "centerZ": center.z, "sizeX": span, "sizeZ": span}}]}
