@@ -4,6 +4,8 @@ Start with [`source/testing_floor/dogwalk_telemetry.gd`](../source/testing_floor
 
 ## Reuse the addon
 
+DOGWALK currently vendors the Godot client at **0.1.0** in `addons/testing_floor`. It is maintained in this example; a separate versioned Godot SDK release is not yet available. The Unity and Unreal SDK version numbers do not apply to this addon.
+
 Copy `addons/testing_floor` into your project and add `autoload.gd` as an autoload named `TestingFloor`. Give it an ignored `TestingFloor.local.json` containing `write_key` and `app_version`, or set `TESTING_FLOOR_WRITE_KEY` in the process environment. Editor collection requires `enable_in_editor: true`. Without configuration, collection is disabled.
 
 ```gdscript
