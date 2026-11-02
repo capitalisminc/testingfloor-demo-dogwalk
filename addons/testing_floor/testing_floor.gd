@@ -14,6 +14,9 @@ const AUTOMATION_ARGUMENTS := ["--tf-test", "--testing-floor-automation"]
 ## Show the QR marker that lets Testing Floor match a recording to this run
 ## without a desktop handoff. Off by default; --forceqr turns it on.
 var qr_heartbeats := false
+## When the window is closed, wait up to two seconds for delivery before quitting.
+## Off by default, because it turns off SceneTree.auto_accept_quit.
+var quit_after_delivery := false
 
 var _http: HTTPRequest
 var _pending_done: Callable
@@ -37,6 +40,8 @@ func _ready() -> void:
 	transport = _send
 	recording_source = _discover
 	start(_now_seconds())
+	if quit_after_delivery:
+		get_tree().auto_accept_quit = false
 	_update_qr()
 
 
@@ -47,9 +52,13 @@ func _process(_delta: float) -> void:
 
 
 func _notification(what: int) -> void:
-	# The window is closing: complete the recording and start the last send. Use
-	# quit() instead to wait for delivery.
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+	if what != NOTIFICATION_WM_CLOSE_REQUEST:
+		return
+	if quit_after_delivery:
+		quit()
+	else:
+		# Godot quits right after this, so the last send may not finish. Use quit()
+		# or quit_after_delivery to wait for delivery.
 		shutdown()
 
 
@@ -88,6 +97,7 @@ func _configure() -> void:
 	object_checks_per_second = float(_setting("object_checks_per_second", object_checks_per_second))
 	max_tracked_objects = int(_setting("max_tracked_objects", max_tracked_objects))
 	qr_heartbeats = bool(_setting("qr_heartbeats", false))
+	quit_after_delivery = bool(_setting("quit_after_delivery", false))
 	app_version = str(_setting("app_version", "")).strip_edges()
 	if app_version.is_empty():
 		app_version = str(ProjectSettings.get_setting("application/config/version", "")).strip_edges()

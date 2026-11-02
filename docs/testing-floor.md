@@ -6,7 +6,7 @@ Start with [`source/testing_floor/dogwalk_telemetry.gd`](../source/testing_floor
 
 `addons/testing_floor` is an unmodified copy of the [Testing Floor SDK for Godot](https://github.com/capitalisminc/testingfloor-sdk-godot) **0.2.0**. To use it in your own game, follow that repository's README: copy the addon, enable the **Testing Floor** plugin, and set **testing_floor/write_key**.
 
-This public example keeps its key out of `project.godot`. `tools/configure.py` writes an ignored `addons/testing_floor/TestingFloor.local.json`, and the `TestingFloorLocalSettings` autoload, listed before `TestingFloor`, copies it into the project settings when the game starts. The `[testing_floor]` section of `project.godot` turns on movement tracking and the QR marker.
+This public example keeps its key out of `project.godot`. `tools/configure.py` writes an ignored `addons/testing_floor/TestingFloor.local.json`, and the `TestingFloorLocalSettings` autoload, listed before `TestingFloor`, copies it into the project settings when the game starts. The `[testing_floor]` section of `project.godot` turns on movement tracking, the QR marker, and `quit_after_delivery`, so closing the window waits briefly for the last events. The same autoload turns collection off for map captures.
 
 ```gdscript
 TestingFloor.context_provider = func():

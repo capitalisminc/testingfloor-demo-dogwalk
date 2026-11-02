@@ -220,12 +220,13 @@ func drain(timeout_seconds := 2.0) -> void:
 		tick(Time.get_ticks_usec() / 1000000.0)
 
 
-## For a game's own automated tests: collects even in an automated run and sends
-## every request to [param fake_transport], func(body: String, done: Callable),
-## instead of the network. Nothing reaches Testing Floor.
+## For a game's own automated tests: collects even in an automated run or the
+## editor, and sends every request to [param fake_transport], func(body: String,
+## done: Callable), instead of the network. Nothing reaches Testing Floor.
 func use_test_transport(fake_transport: Callable) -> void:
 	transport = fake_transport
 	is_automation = false
+	enable_in_editor = true
 	if write_key.strip_edges().is_empty():
 		write_key = "test-only-never-transmitted"
 	if _started and not _shutdown and enabled:

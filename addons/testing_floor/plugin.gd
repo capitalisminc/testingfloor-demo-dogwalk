@@ -14,6 +14,7 @@ const SETTINGS := [
 	["object_checks_per_second", TYPE_FLOAT, 4.0, PROPERTY_HINT_RANGE, "1,10,0.5"],
 	["max_tracked_objects", TYPE_INT, 256, PROPERTY_HINT_RANGE, "0,4096"],
 	["qr_heartbeats", TYPE_BOOL, false, PROPERTY_HINT_NONE, ""],
+	["quit_after_delivery", TYPE_BOOL, false, PROPERTY_HINT_NONE, ""],
 ]
 
 

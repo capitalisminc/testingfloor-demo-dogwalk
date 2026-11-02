@@ -327,3 +327,4 @@ pinda_position={
 
 movement_tracking=true
 qr_heartbeats=true
+quit_after_delivery=true
